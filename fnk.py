@@ -47,14 +47,12 @@ def trouverarbre(n,N,K,kf,to,noeuds):
     trouverarbre(int(math.ceil(ab/float(coef(r,N,m,K)))),r,m,kf,to,noeuds)
 
 def trouvernoeuds(N,K,ab,r,s,noeuds):
-    #combien de feuilles on ete chosies
-  
+    #combien de feuilles on ete chosies  
     #on determine la composition
     l=composition(N+K-r-s,K-s,int(math.ceil(ab/float(binomial(r,K-s))))-1)
 #    print 'ab%f' % math.ceil(ab/float(binomial(r,K-s)))
 #    print 'comp= %d' % (math.ceil(ab/binomial(r,K-s))-1)
     comp=l[int(math.ceil(ab/float(binomial(r,K-s))))-1]
-    
     #penser a augmenter de 1 la compo
     #for t in range(0,len(comp)):
     #   comp[t]=comp[t]+1
@@ -65,7 +63,7 @@ def trouvernoeuds(N,K,ab,r,s,noeuds):
     
     ra= maj_noeuds(comp,N,K)
     #print 'ra %s' % str(ra)
-   # const_arbre(N,K,ab,r,s,comp,noeuds)
+    const_arbre(N,K,ab,r,s,comp,noeuds)
     return ra
 
 
@@ -133,8 +131,7 @@ def trouverfk(N,K,n,CO):
         r=r+1
     else:
         m=m+1
-    ab=ab+CO[r][m]
-    
+    ab=ab+CO[r][m]    
     return [r,m,ab]
 
 def composition(n, length,num):
@@ -229,15 +226,16 @@ def calcul_CO(N,kf,K):
 
 
 
-def recursive_generator():
+def recursive_generator(N):
 
-    taille=[int(pow(N,0.5)),int(math.log(N)),int((N*(N+1)*0.25))-1,N,int(N/2)]
+    #taille=[int(pow(N,0.5)),int(math.log(N)),int((N*(N+1)*0.25))-1,N,int(N/2)]
+    taille=[N]
     elem=[]
     res=[]
     res2=[]
     nb_ok=1
     ind=0
-    moy=1000
+    moy=100
     for e in taille:
         print 'nouveau'
         elem.append([])
@@ -254,19 +252,24 @@ def recursive_generator():
             print '%d' % nb_ok
             if(nb_ok % 50==0):
                 print '%d' % nb_ok
-            to=un_arbre(N,e,elem[ind])
+            to=un_arbre(N,e)
+            noeuds=recon_arbre(to[1])
+          #  print 'arbre non %s' % str(noeuds)
+          #  print 'arbre apres %s' % str(elaguer_arbre(noeuds))
+            resdeg=[0 for i in range(N+1)]
+            degree_arbre(elaguer_arbre(noeuds),resdeg)
+            print 'degree %s' % str(resdeg)
            # print 'recur %s' % str(noeuds)
            # noeuds2=recon_arbre(noeuds)
-            ajout_res(res[ind],to)
+            ajout_res(res[ind],resdeg)
           #  print '%s' % str(res)
             nb_ok=nb_ok+1
             for z in range(0,len(elem[ind])):
                 elem[ind][z]=0
                 #    n=n+1
            # taille=taille + height(noeuds2)
-            noeuds=[]
-            noeuds2=[]
         nb_ok=nb_ok-1
+        print 'res %s' % str(res)
         for z in range(0,len(res[ind])):
             res2[ind][z]=res[ind][z]/float(nb_ok)
         ind=ind+1
@@ -278,7 +281,6 @@ def recursive_generator():
         # print 'prob %f' % (prob/float(nb_ok))
         #tabtaille.append(taille/float(nb_ok))
         nb_ok=1
-        
         print 'fini'
     print '# moyenne sur %d taille %d' % (moy,N)
     for yu in range(0,len(res2[0])):
@@ -291,15 +293,35 @@ def recursive_generator():
     return res2
 
 
-def un_arbre(t,k,neouds):
+def un_arbre(t,k):
+    noeuds=[]
     to=[]
     for r in range(0,t+1):
         to.append(0)
     n=random.randint(1,kf[t][k])
     trouverarbre(n,t,k,kf,to,noeuds)
-    return to
+    return [to,noeuds]
 
 
+
+def elaguer_arbre(arbre):
+#    print 'elaguer %s' % str(arbre)
+    if(arbre is None):
+        print 'a voir'
+        return []
+    fils=[]
+    for e in arbre[2]:
+        if not(e[2] is None):
+            fils.append(elaguer_arbre(e))
+    return [arbre[0],arbre[1],fils]
+
+def degree_arbre(arbre,res):
+    if arbre[2]==[]:
+        return
+    for e in arbre[2]:
+        degree_arbre(e,res)
+    res[len(arbre[2])-1]=res[len(arbre[2])-1]+1
+    
 
 
 def gene_dot(noeuds):
@@ -311,7 +333,7 @@ def gene_dot(noeuds):
     fil.write("}\n")
 
 def ecrit(fil,noeuds):
-    print 'ecrit %s' % noeuds
+   # print 'ecrit %s' % noeuds
     if not(noeuds[2]==None):
         fil.write(string.join([str(noeuds[0]),"[shape=plaintext,label=\"",str(noeuds[1]),"\"]","\n"], " "))
         i = len(noeuds)
@@ -327,26 +349,26 @@ def ecrit(fil,noeuds):
    
 
 def recon_arbre(noeuds):
-    print 'recon %s' % str(noeuds)
+   # print 'recon %s' % str(noeuds)
     id=[2]
     abr=initialistation(noeuds[len(noeuds)-1],id)
     rac=[1,1,abr]
 
     for fg in range(1,len(noeuds)):
-        print 'ahhhhhhhhhh %d' % len(noeuds)
+       # print 'ahhhhhhhhhh %d' % len(noeuds)
         j=len(noeuds)-1-fg
         for k in range(0,len(noeuds[j])):
             if not(noeuds[j][k]==None):
-                print 'noeuds j k %s' % noeuds[j][k]
+        #        print 'noeuds j k %s' % noeuds[j][k]
                 etendre(k,noeuds[j][k],rac,fg+1,id)
-    print 'cloche %s' % str(rac)
+   # print 'cloche %s' % str(rac)
     return rac
             
 
 
 def etendre(k,ari,rac,lab,id):
 #    print 'trouver %d' % k
-    print 'arite %d' % ari
+ #   print 'arite %d' % ari
     x=trouver_feuille(k,rac)
     etendre_feuille(x,ari,lab,id)
 
@@ -414,7 +436,7 @@ if(sys.argv[2]=='0'):
 
 elif(sys.argv[2]=='1'):
     
-    recursive_generator()
+    recursive_generator(int(sys.argv[1]))
 else:
     
    if(int(sys.argv[3])>int(sys.argv[1])):

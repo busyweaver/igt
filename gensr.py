@@ -60,15 +60,13 @@ def trouverarbre(n,N,F,to,noeuds):
         return to
     CO=CON[N]
     re=trouverfk(n,CO)
-    print 're0 %d' % re[0]
+   # print 're0 %d' % re[0]
     #our composition
     comps=compodic(N-1)
     boncomp=comps[re[0]-1]
     to[len(boncomp) -1]=to[len(boncomp) -1 ]+1
-    print 'tab %s' % str(boncomp)
+   # print 'tab %s' % str(boncomp)
     for i in range(0,len(boncomp)):
-        print 'nnnn %d' % math.ceil(re[1])
-        print 'nnnn2 %d' % math.ceil(compo_productbis(boncomp,N-1,i))
         trouverarbre(math.ceil(re[1]/float(compo_productbis(boncomp,N-1,i))),boncomp[i],F,to,noeuds)
     
 
@@ -97,7 +95,7 @@ def const_arbre(N,i,k,comp,noeuds):
 
 def trouverfk(n,CO):
   #  print 'trouverfk %s' % (str(CO))
-    print 'trouverfk %d' % n
+  #  print 'trouverfk %d' % n
     
     ab=n
     m=len(CO)-1
@@ -202,7 +200,7 @@ def recursive_generator(N):
     ind=0
     tabtaille=[]
     tr=[0]
-    moy=1000
+    moy=10
     for e in tr:
         print 'nouveau'
         elem.append([])
@@ -235,7 +233,6 @@ def recursive_generator(N):
         print 'res %s ' % (str(res[ind]))
         for z in range(0,len(res[ind])):
             res2[ind][z]=res[ind][z]/float(nb_ok)
-        
                 
         # prob=0
         # for cv in range(2,len(res[0])):
@@ -391,7 +388,7 @@ if(sys.argv[2]=='0'):
 
 elif(sys.argv[2]=='1'):
     cal_coeff()
-    print 'kf %s' % str(kf)
+   # print 'kf %s' % str(kf)
     moy=recursive_generator(int(sys.argv[1]))
 #    print 'res %s' % str(moy[0])
     
