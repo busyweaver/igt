@@ -228,8 +228,11 @@ def calcul_CO(N,kf,K):
 
 def recursive_generator(N):
 
-    #taille=[int(pow(N,0.5)),int(math.log(N)),int((N*(N+1)*0.25))-1,N,int(N/2)]
-    taille=[N]
+    taille=[int(pow(N,0.5)),
+            int(math.log(N)),
+            N,
+            int(N/2)]
+    #taille=[N]
     elem=[]
     res=[]
     res2=[]
@@ -258,7 +261,7 @@ def recursive_generator(N):
           #  print 'arbre apres %s' % str(elaguer_arbre(noeuds))
             resdeg=[0 for i in range(N+1)]
             degree_arbre(elaguer_arbre(noeuds),resdeg)
-            print 'degree %s' % str(resdeg)
+          #  print 'degree %s' % str(resdeg)
            # print 'recur %s' % str(noeuds)
            # noeuds2=recon_arbre(noeuds)
             ajout_res(res[ind],resdeg)
@@ -269,7 +272,7 @@ def recursive_generator(N):
                 #    n=n+1
            # taille=taille + height(noeuds2)
         nb_ok=nb_ok-1
-        print 'res %s' % str(res)
+      #  print 'res %s' % str(res)
         for z in range(0,len(res[ind])):
             res2[ind][z]=res[ind][z]/float(nb_ok)
         ind=ind+1

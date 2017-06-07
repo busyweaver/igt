@@ -200,7 +200,7 @@ def recursive_generator(N):
     ind=0
     tabtaille=[]
     tr=[0]
-    moy=10
+    moy=1000
     for e in tr:
         print 'nouveau'
         elem.append([])
@@ -219,7 +219,7 @@ def recursive_generator(N):
             if(nb_ok % 100==0):
                 print '%d' % nb_ok
             to=un_arbre(N,elem[ind])
-            print 'un arbre %s' % str(to)
+           # print 'un arbre %s' % str(to)
            # noeuds2=recon_arbre(noeuds)
             ajout_res(res[ind],to)
             nb_ok=nb_ok+1
@@ -230,7 +230,7 @@ def recursive_generator(N):
             noeuds=[]
             noeuds2=[]
         nb_ok=nb_ok-1
-        print 'res %s ' % (str(res[ind]))
+       # print 'res %s ' % (str(res[ind]))
         for z in range(0,len(res[ind])):
             res2[ind][z]=res[ind][z]/float(nb_ok)
                 
