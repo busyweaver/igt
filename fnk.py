@@ -231,6 +231,7 @@ def recursive_generator(N):
     taille=[int(pow(N,0.5)),
             int(math.log(N)),
             N,
+            int((N-2)*(N-3)*0.5),
             int(N/2)]
     #taille=[N]
     elem=[]
@@ -256,15 +257,18 @@ def recursive_generator(N):
             if(nb_ok % 50==0):
                 print '%d' % nb_ok
             to=un_arbre(N,e)
-            noeuds=recon_arbre(to[1])
+           # noeuds=recon_arbre(to[1])
           #  print 'arbre non %s' % str(noeuds)
           #  print 'arbre apres %s' % str(elaguer_arbre(noeuds))
-            resdeg=[0 for i in range(N+1)]
-            degree_arbre(elaguer_arbre(noeuds),resdeg)
+          #a decommenter pour elegage
+            #resdeg=[0 for i in range(N+1)]
+            #degree_arbre(elaguer_arbre(noeuds),resdeg)
+            # ajout_res(res[ind],resdeg)
           #  print 'degree %s' % str(resdeg)
            # print 'recur %s' % str(noeuds)
            # noeuds2=recon_arbre(noeuds)
-            ajout_res(res[ind],resdeg)
+            ajout_res(res[ind],to[1])
+           
           #  print '%s' % str(res)
             nb_ok=nb_ok+1
             for z in range(0,len(elem[ind])):
