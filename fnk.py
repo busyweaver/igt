@@ -238,7 +238,7 @@ def recursive_generator(N):
     res2=[]
     nb_ok=1
     ind=0
-    moy=100
+    moy=1000
     for e in taille:
         print 'nouveau'
         elem.append([])
