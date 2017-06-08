@@ -232,14 +232,15 @@ def recursive_generator(N):
             int(math.log(N)),
             N,
             int((N-2)*(N-3)*0.5),
-            int(N/2)]
+            int(N/2)
+		]
     #taille=[N]
     elem=[]
     res=[]
     res2=[]
     nb_ok=1
     ind=0
-    moy=1000
+    moy=100
     for e in taille:
         print 'nouveau'
         elem.append([])
@@ -257,17 +258,17 @@ def recursive_generator(N):
             if(nb_ok % 50==0):
                 print '%d' % nb_ok
             to=un_arbre(N,e)
-           # noeuds=recon_arbre(to[1])
+            noeuds=recon_arbre(to[1])
           #  print 'arbre non %s' % str(noeuds)
           #  print 'arbre apres %s' % str(elaguer_arbre(noeuds))
           #a decommenter pour elegage
-            #resdeg=[0 for i in range(N+1)]
-            #degree_arbre(elaguer_arbre(noeuds),resdeg)
-            # ajout_res(res[ind],resdeg)
+          #  resdeg=[0 for i in range(N+1)]
+          #  degree_arbre(elaguer_arbre(noeuds),resdeg)
+          #  ajout_res(res[ind],resdeg)
           #  print 'degree %s' % str(resdeg)
            # print 'recur %s' % str(noeuds)
            # noeuds2=recon_arbre(noeuds)
-            ajout_res(res[ind],to[1])
+            ajout_res(res[ind],to[0])
            
           #  print '%s' % str(res)
             nb_ok=nb_ok+1
@@ -294,7 +295,8 @@ def recursive_generator(N):
         y= " "
         x=[str(yu+1)]
         for i in range(0,len(taille)):
-            x.append(str(res2[i][yu]))
+	    x.append(" & ")
+            x.append(str(res2[i][yu]
         print '%s' %  y.join(x) 
        
     return res2
