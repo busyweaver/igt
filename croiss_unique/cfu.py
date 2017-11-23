@@ -26,10 +26,10 @@ def trouverarbre(n,N,F,CON,noeuds):
     re=trouverfk(n,CO)
   #  print 're %d %d' % (re[0],re[1])
     
-    numfeuille=int(math.ceil(re[1]%float(re[0])))
+    numfeuille=int(math.ceil(re[1]%float(re[0])))+1
     numarbre=int(math.ceil(re[1]/float(re[0])))
     #N-re[0] correspond a l arite de la feuille construite
-    noeuds.append([numfeuille,N-re[0]+1,re[0]])
+    noeuds.append([numfeuille,N-re[0]+1])
   #  print 'numf %d  numarbre %d ' % (numfeuille,numarbre)
     #print 'noeuds %s' % str(noeuds)
     trouverarbre(numarbre,re[0],F,CON,noeuds)
@@ -262,9 +262,11 @@ def un_arbre(t,kf,CON):
     
 
 def iterateur(t,kf,CON):
+    tmp=[]
     res=[]
     for n in range(1,kf[t]+1):
-       trouverarbre(n,t,kf,CON,res)
-       print '%s' % str(res)
-       res=[]
+       trouverarbre(n,t,kf,CON,tmp)
+       print '%s' % str(tmp)
+       res.append(tmp)
+       tmp=[]
 

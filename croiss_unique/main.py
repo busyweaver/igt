@@ -1,19 +1,40 @@
 import cfu
 import sys
 import string
-def main():
-
-
-    N=int(sys.argv[1])
-    recur = [0,1]
-    recurint=[
+import prm
+import trans
+N=int(sys.argv[1])
+recur = [0,1]
+recurint=[
     [0],
     [1]
     ]
+
+
+def main():
+
+    tab=[]
+    res2=[]
+    res=prm.perm_contr(N,1,2)
+    
+    for e in res:
+        print e 
+        trans.permtoarb(e,tab)
+        print 'allee'
+        print tab
+        print 'retour'
+        trans.arbtoperm(tab,res2)
+        print res2
+        print ''
+        res2=[]
+        tab=[]
+    print 'fin'
     cfu.recurrence(N,recur,recurint)
     cfu.iterateur(int(sys.argv[1]),recur,recurint)
-    print "%s" % str(recurint)
-    print "%s" % str(recur)
+    
+    #print "%s" % str(recurint)
+    #print "%s" % str(recur)
+    
     #arbrefor=cfu.un_arbre(int(sys.argv[1]),recur,recurint)
     
     #arbre=cfu.recon_arbre(arbrefor)
