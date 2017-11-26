@@ -11,32 +11,102 @@ recurint=[
     ]
 
 
+def triangle_hauteur(N):
+    ren=[]
+    for i in range(2,N+1):
+        haut = [0 for j in range(0,N)]
+        res=cfu.iterateur(i,recur,recurint)
+        for e in res:
+            #print e
+            res2 = trans.recon_arbre(e)
+            #print res2
+            h = trans.hauteur(res2)
+            haut[h]=haut[h]+1
+        ren.append(haut)
+    return ren
+    
+def nbdescente_perm(N):
+    ren=[]
+    for i in range(2,N+1):
+        haut = [0 for j in range(0,N)]
+        res=prm.perm_contr(i,1,2)
+        for e in res:
+            #print e
+            #print res2
+            h = prm.nb_descente(e)
+            haut[h]=haut[h]+1
+        ren.append(haut)
+    return ren
+
+def triangle_noeuds(N):
+    ren=[]
+    for i in range(2,N+1):
+        haut = [0 for j in range(0,N)]
+        res=cfu.iterateur(i,recur,recurint)
+        for e in res:
+            #print e
+            res2 = trans.recon_arbre(e)
+            #print res2
+            h = trans.nombre_noeuds(res2)
+            #print h
+            haut[h]=haut[h]+1
+        ren.append(haut)
+    return ren
+
 def main():
 
-    tab=[]
-    res2=[]
-    res=prm.perm_contr(N,1,2)
-    
-    for e in res:
-        print e 
-        trans.permtoarb(e,tab)
-        print 'allee'
-        print tab
-        print 'retour'
-        trans.arbtoperm(tab,res2)
-        print res2
-        print ''
-        res2=[]
-        tab=[]
-    print 'fin'
+    # tab=[]
+    # res2=[]
+    # perm=prm.perm_contr(N,1,2)
+    # for e in perm:
+    #     res=prm.profil(e)
+    #     print res
+    # for e in res:
+    #     print e 
+    #     trans.permtoarb(e,tab)
+    #     print 'allee'
+    #     print tab
+    #     print 'retour'
+    #     trans.arbtoperm(tab,res2)
+    #     print res2
+    #     print ''
+    #     res2=[]
+    #     tab=[]
+    # print 'fin'
     cfu.recurrence(N,recur,recurint)
-    cfu.iterateur(int(sys.argv[1]),recur,recurint)
+    res=cfu.iterateur(N,recur,recurint)
+    print res
+    haut=[[] for i in range(0,N)]
+    for e in res:
+        pr=[]
+        print e
+        trans.arbtoperm(e,pr)
+        res2=trans.recon_arbre(e)
+        h=trans.hauteur(res2)
+        haut[h].append(pr)
+        print res2
+        
+    for j in range(0,len(haut)):
+        print j
+        for i in haut[j]:
+            print i
+
+             
+    # res = triangle_noeuds(N)
+    # for e in res:
+    #     for g in e:
+    #         print g
     
+    
+    #res = nbdescente_perm(N)
+    #print res
     #print "%s" % str(recurint)
     #print "%s" % str(recur)
     
     #arbrefor=cfu.un_arbre(int(sys.argv[1]),recur,recurint)
-    
+    #print arbrefor
+    #res=trans.recon_arbre(arbrefor)
+    #print res
     #arbre=cfu.recon_arbre(arbrefor)
 #    gene_dot(arbre)
 

@@ -253,11 +253,12 @@ def height(arbre):
 
 
 def un_arbre(t,kf,CON):
-    print '%d' % kf[t]
+    #print '%d' % kf[t]
     n=random.randint(1,kf[t]+1)
+    print 'numero tire %d sur un total de %d' % (n,kf[t])
     res=[]
-    trouverarbre(n,t,kf,CON,res)
-    print '%s' % str(res)
+    trouverarbre(3,t,kf,CON,res)
+    
     return res 
     
 
@@ -266,7 +267,8 @@ def iterateur(t,kf,CON):
     res=[]
     for n in range(1,kf[t]+1):
        trouverarbre(n,t,kf,CON,tmp)
-       print '%s' % str(tmp)
+      # print '%s' % str(tmp)
        res.append(tmp)
        tmp=[]
+    return res
 
