@@ -257,7 +257,7 @@ def un_arbre(t,kf,CON):
     n=random.randint(1,kf[t]+1)
     print 'numero tire %d sur un total de %d' % (n,kf[t])
     res=[]
-    trouverarbre(3,t,kf,CON,res)
+    trouverarbre(n,t,kf,CON,res)
     
     return res 
     

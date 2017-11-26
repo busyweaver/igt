@@ -75,27 +75,26 @@ def main():
     # print 'fin'
     cfu.recurrence(N,recur,recurint)
     res=cfu.iterateur(N,recur,recurint)
-    print res
+    #print res
     haut=[[] for i in range(0,N)]
     for e in res:
         pr=[]
-        print e
+       # print e
         trans.arbtoperm(e,pr)
         res2=trans.recon_arbre(e)
         h=trans.hauteur(res2)
         haut[h].append(pr)
-        print res2
+        #print res2
         
-    for j in range(0,len(haut)):
-        print j
-        for i in haut[j]:
-            print i
+    # for j in range(0,len(haut)):
+    #     print j
+    #     for i in haut[j]:
+    #         print i
 
-             
-    # res = triangle_noeuds(N)
-    # for e in res:
-    #     for g in e:
-    #         print g
+    res = triangle_hauteur(N)
+    for e in res:
+        for g in e:
+            print g
     
     
     #res = nbdescente_perm(N)

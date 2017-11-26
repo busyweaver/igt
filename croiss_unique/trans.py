@@ -130,7 +130,7 @@ def ecrit(fil,noeuds):
 ##############" BIJECTION INTERMEDIAIRE ##################
 
 def recon_arbre(noeuds):
-    print noeuds
+    #print noeuds
     id=[2]
     abr=initialistation(noeuds[len(noeuds)-1],id)
     rac=[1,1,abr]
